@@ -1,9 +1,53 @@
-# MERIT: Learning Disentangled Music Representations for Audio Similarity
+<div align="center">
 
+<h1>MERIT</h1>
+<h3>Multi-Factor Disentangled Music Similarity</h3>
 
-MERIT learns three disentangled similarity representations: **melody**, **rhythm**, and **timbre** from a single frozen MERT-v1-330M backbone using contrastive learning with triplet data generated via the JASCO music generation model.
+[![ISMIR 2026](https://img.shields.io/badge/ISMIR-2026-4472C4?style=flat-square)](https://github.com/AMAAI-Lab/MERIT)
+[![HuggingFace Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-amaai--lab%2Fmerit-ffd21e?style=flat-square)](https://huggingface.co/amaai-lab/merit)
+[![HuggingFace Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-amaai--lab%2Fmerit-ff9d00?style=flat-square)](https://huggingface.co/datasets/amaai-lab/merit)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)](LICENSE)
 
-> Pre-trained heads: [huggingface.co/amaai-lab/merit](https://huggingface.co/amaai-lab/merit)
+<br/>
+
+*Most similarity models collapse melody, rhythm, and timbre into a single undifferentiated score.*
+*MERIT exposes all three as independent, interpretable signals from the same audio query.*
+
+<br/>
+
+![MERIT architecture](./fig_overview.png)
+
+</div>
+
+---
+
+## What is MERIT?
+
+Given two audio clips, MERIT returns **three independent cosine similarities** — one per musical factor:
+
+| Score | Captures | Example query |
+|---|---|---|
+| `S_mel` | Melodic contour & pitch identity | *"Find songs with the same melody"* |
+| `S_rhy` | Rhythmic groove & beat pattern | *"Find songs with the same drum feel"* |
+| `S_tim` | Instrument timbre & sonic character | *"Find songs played on the same instrument"* |
+
+A solo piano cover of a rock anthem scores high on `S_mel` but low on `S_rhy` and `S_tim`. MERIT makes this distinction explicit and computable.
+
+---
+
+## HuggingFace Resources
+
+| Resource | Link | Description |
+|---|---|---|
+| Pre-trained heads | [amaai-lab/merit](https://huggingface.co/amaai-lab/merit) | 3 × ~11 MB projection heads |
+| Training dataset | [datasets/amaai-lab/merit](https://huggingface.co/datasets/amaai-lab/merit) | 296K factor-controlled triplets |
+
+```bash
+# Download pre-trained heads only (~33 MB total)
+huggingface-cli download amaai-lab/merit \
+    head_mel/best_head.pt head_rhy/best_head.pt head_tim/best_head.pt \
+    --local-dir ./models
+```
 
 ---
 
@@ -102,16 +146,28 @@ timbre_sim  = (emb_a[2] * emb_b[2]).sum().item()
 ## Architecture
 
 ```
-MERT-v1-330M (frozen)
-  └─ Layers 3, 4, 5, 6, 23  →  mean-pool over time  →  concat  →  5120-dim
+Audio (24 kHz mono)
+  └─► MERT-v1-330M [FROZEN]
+        Layers 3, 4, 5, 6, 23
+        └─► mean-pool over time → concat → 5120-dim
 
-Per-factor MLP head (trained independently):
-  Linear(5120 → 512, bias=True) → ReLU → Linear(512 → 128, bias=False) → L2-norm
-
-Loss: Circle Loss (γ=10, m=0.2)
-Optimizer: AdamW (lr=1e-3)
-Schedule: Cosine annealing, 200 epochs
+5120-dim backbone vector
+  ├─► H_mel  Linear(5120→512) → ReLU → Linear(512→128) → L2-norm  →  S_mel
+  ├─► H_rhy  Linear(5120→512) → ReLU → Linear(512→128) → L2-norm  →  S_rhy
+  └─► H_tim  Linear(5120→512) → ReLU → Linear(512→128) → L2-norm  →  S_tim
 ```
+
+Each head is trained **independently** with Circle Loss on triplets where only one musical factor varies at a time.
+
+| Component | Detail |
+|---|---|
+| Backbone | MERT-v1-330M, 330M params, frozen |
+| Layers extracted | 3, 4, 5, 6, 23 (5 × 1024-dim → 5120-dim) |
+| Head architecture | Linear → ReLU → Linear → L2-norm |
+| Embedding dim | 128 per factor |
+| Loss | Circle Loss (γ=10, m=0.2) |
+| Optimizer | AdamW, lr=1e-3 |
+| Schedule | Cosine annealing, 200 epochs |
 
 ---
 
@@ -159,9 +215,9 @@ huggingface-cli download --repo-type dataset amaai-lab/merit \
     --local-dir ./data/triplets
 ```
 
-Each archive extracts to `triplets_*/triplet/{anchor.wav, positive_01-05.wav, negative.wav, triplet_meta.json}`.
+Each archive extracts to `triplets_*/triplet/{anchor.wav, positive_01-05.wav, negative.wav, triplet_meta.json}`. Within each folder, **only the target factor is shared** between anchor and positives — key, genre, and instrumentation vary freely.
 
-> The timbre factor uses audio stems from [MoisesDB](https://music.ai/research/moisesdb/). The full dataset is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+> Dataset licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) — derived from [MoisesDB](https://music.ai/research/moisesdb/). Non-commercial use only.
 
 ---
 
@@ -278,7 +334,12 @@ python training/merge_pkl.py \
 If you use this code, please cite:
 
 ```bibtex
-TODO: add after arxiv submission
+@inproceedings{merit2026,
+  title     = {Learning Disentangled Music Representations for Audio Similarity},
+  booktitle = {Proceedings of the 27th International Society for Music Information Retrieval
+               Conference (ISMIR)},
+  year      = {2026},
+}
 ```
 
 ---
