@@ -134,7 +134,7 @@ bash scripts/6_run_probes.sh
 
 ### Multi-GPU Embedding Extraction (Optional — Advanced)
 
-For large datasets, `extract_embeddings.py` supports sharding across multiple GPUs to speed up extraction. Skip this if running on a single GPU — `scripts/3_extract_embeddings.sh` handles that directly.
+`extract_embeddings.py` supports sharding across multiple GPUs to speed up extraction. Skip this if running on a single GPU — `scripts/3_extract_embeddings.sh` handles that directly.
 
 ```bash
 # Run on 4 GPUs (adjust CUDA_VISIBLE_DEVICES accordingly)
