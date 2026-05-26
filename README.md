@@ -86,10 +86,10 @@ export PROBES_ROOT=/your/path/probes
 
 ### Using Pre-trained Heads (recommended)
 
-The three trained projection heads (melody, rhythm, timbre) are available on HuggingFace (~3 MB total):
+The three trained projection heads (melody, rhythm, timbre) are available on HuggingFace (~11 MB each):
 
 ```bash
-huggingface-cli download amaai-lab/merit-heads --local-dir ./models
+huggingface-cli download amaai-lab/merit head_mel/best_head.pt head_rhy/best_head.pt head_tim/best_head.pt --local-dir ./models
 ```
 
 > **Want to run MERIT on your own audio?** This is all you need — no training required. Download the heads, encode your audio with `evaluation/encode_folder.py`, and project with the heads. No MoisesDB, no JASCO, no GPU-days of training.
