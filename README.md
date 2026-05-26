@@ -1,7 +1,7 @@
 # MERIT: Learning Disentangled Music Representations for Audio Similarity
 
 
-MERIT learns three disentangled similarity representations — **melody**, **rhythm**, and **timbre** — from a single frozen MERT-v1-330M backbone using contrastive learning with triplet data generated via the JASCO music generation model.
+MERIT learns three disentangled similarity representations: **melody**, **rhythm**, and **timbre** from a single frozen MERT-v1-330M backbone using contrastive learning with triplet data generated via the JASCO music generation model.
 
 ---
 
