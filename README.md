@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 ### JASCO (required for triplet generation only)
 
-Triplet generation uses the [JASCO](https://huggingface.co/facebook/jasco-chords-drums-melody-1B) music generation model (Meta AI). Follow their installation instructions and then set:
+Triplet generation uses the [JASCO](https://github.com/facebookresearch/audiocraft/blob/main/docs/JASCO.md) music generation model (Meta AI). Follow their installation instructions and then set:
 
 ```bash
 export JASCO_ROOT=/path/to/jasco-audiocraft
