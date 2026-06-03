@@ -6,8 +6,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2605.27346-b31b1b.svg)](https://arxiv.org/abs/2605.27346)
 [![HuggingFace Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-amaai--lab%2Fmerit-ffd21e?style=flat-square)](https://huggingface.co/amaai-lab/merit)
 [![HuggingFace Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-amaai--lab%2Fmerit-ff9d00?style=flat-square)](https://huggingface.co/datasets/amaai-lab/merit)
-> [!NOTE]
-> 📄 **[Paper TLDR](https://arxivexplained.com/papers/merit-learning-disentangled-music-representations-for-audio-similarity)**
+
 <br/>
 
 *Most similarity models collapse melody, rhythm, and timbre into a single undifferentiated score.*
@@ -16,7 +15,7 @@
 <br/>
 
 ![MERIT architecture](./fig_overview.png)
-
+📄 **[Paper TLDR](https://arxivexplained.com/papers/merit-learning-disentangled-music-representations-for-audio-similarity)**
 </div>
 
 ---
