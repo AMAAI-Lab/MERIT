@@ -334,11 +334,11 @@ python training/merge_pkl.py \
 If you use this code, please cite:
 
 ```bibtex
-@article{merit2026,
-  title   = {Learning Disentangled Music Representations for Audio Similarity},
-  author  = {},
-  journal = {arXiv preprint arXiv:coming soon},
-  year    = {2026},
+@article{roy2026merit,
+  title={MERIT: Learning Disentangled Music Representations for Audio Similarity},
+  author={Roy, Abhinaba and Liang, Junyi and Herremans, Dorien},
+  journal={arXiv preprint arXiv:2605.27346},
+  year={2026}
 }
 ```
 
