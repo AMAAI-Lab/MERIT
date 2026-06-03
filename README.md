@@ -10,12 +10,12 @@
 <br/>
 
 *Most similarity models collapse melody, rhythm, and timbre into a single undifferentiated score.*
-*MERIT exposes all three as independent, interpretable signals from the same audio query.*
+*MERIT exposes all three as independent, interpretable signals from the same audio query.* 📄 **[Paper TLDR](https://arxivexplained.com/papers/merit-learning-disentangled-music-representations-for-audio-similarity)**
 
 <br/>
 
 ![MERIT architecture](./fig_overview.png)
-📄 **[Paper TLDR](https://arxivexplained.com/papers/merit-learning-disentangled-music-representations-for-audio-similarity)**
+
 </div>
 
 ---
