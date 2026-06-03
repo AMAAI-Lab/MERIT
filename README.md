@@ -3,10 +3,9 @@
 <h1>MERIT</h1>
 <h3>Multi-Factor Disentangled Music Similarity</h3>
 
-[![ISMIR 2026](https://img.shields.io/badge/ISMIR_2026-Under_Review-4472C4?style=flat-square)](https://github.com/AMAAI-Lab/MERIT)
+[![arXiv](https://img.shields.io/badge/arXiv-2605.27346-b31b1b.svg)](https://arxiv.org/abs/2605.27346)
 [![HuggingFace Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-amaai--lab%2Fmerit-ffd21e?style=flat-square)](https://huggingface.co/amaai-lab/merit)
 [![HuggingFace Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-amaai--lab%2Fmerit-ff9d00?style=flat-square)](https://huggingface.co/datasets/amaai-lab/merit)
-[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)](LICENSE)
 
 <br/>
 
